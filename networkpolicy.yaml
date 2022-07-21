@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  labels:
+    network-policy-generator.stackrox.io/from-baseline: "true"
+  name: stackrox-baseline-generated-richard
+  namespace: right
+spec:
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: left
+      podSelector:
+        matchLabels:
+          deployment: mark
+    ports:
+    - port: 8080
+      protocol: TCP
+  podSelector:
+    matchLabels:
+      deployment: richard
+  policyTypes:
+  - Ingress
